@@ -4,9 +4,10 @@ import Input from "./InputField";
 import "./Task.css";
 
 class Task extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
+      editedContent: props.todo.value,
       edit: false
     };
   }
@@ -36,7 +37,7 @@ class Task extends React.Component {
       return (
         <div className='task clearfix'>
           <Input
-            userInput={this.props.todo.value}
+            userInput={this.state.editedContent}
             value='Save'
             edit={this.state.edit}
             index={this.props.index}
@@ -44,15 +45,23 @@ class Task extends React.Component {
               this.props.handleEdit(
                 event,
                 this.props.index,
-                this.handelEditButtonClick
+                this.handelEditButtonClick,
+                this.state.editedContent
               );
             }}
-            handleChange={this.props.changeInput}
+            handleChange={evt => {
+              this.changeEditedContent(evt);
+            }}
           />
         </div>
       );
     }
   }
+  changeEditedContent = evt => {
+    this.setState({
+      editedContent: evt.target.value
+    });
+  };
 
   handelEditButtonClick = () => {
     let newEdit = !this.state.edit;

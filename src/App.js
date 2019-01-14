@@ -39,12 +39,11 @@ class App extends Component {
     });
   };
 
-  handleEdit = (evt, index, handleClick) => {
-    console.log("d", index);
+  handleEdit = (evt, index, handleClick, editedContent) => {
     evt.preventDefault();
     var todos = [...this.state.todos];
     var indexx = todos.findIndex(todo => todo.id === index);
-    todos[indexx].value = this.state.userInput;
+    todos[indexx].value = editedContent;
     todos[indexx].done = this.state.todos[indexx].done;
     this.setState({ todos });
     handleClick();
@@ -74,10 +73,10 @@ class App extends Component {
     });
   };
   handleSearch = evt => {
+    evt.preventDefault();
     this.setState({
       searchField: ""
     });
-    evt.preventDefault();
   };
   render() {
     window.localStorage.clear();
@@ -101,7 +100,7 @@ class App extends Component {
           onSubmit={this.handleSubmit}
           value='Add'
         />
-        <Tab activeStage={this.activeStage} />
+        <Tab activeStage={this.activeStage} activeState={this.state.active} />
 
         <TaskList
           searchField={this.state.searchField}

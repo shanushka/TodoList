@@ -3,8 +3,10 @@ import React from "react";
 import Task from "./Task";
 
 const TaskList = props => {
+  console.log(props.todos);
 
-  let filteredContent = props.todos.filter(todo => {
+  let filteredContent =
+  props.todos.filter(todo => {
     return todo.value.indexOf(props.searchField) !== -1;
   });
 

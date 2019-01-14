@@ -1,8 +1,10 @@
 .task {
   text-decoration: none;
-  width: 75%;
-  margin: 25px auto;
-  border-bottom: 2px solid #ededed;
+  width: 100%;
+  margin: 8px auto;
+  line-height: 45px;
+  border-radius: 10px;
+  background: #f0eded;
 }
 
 .tasks.complete {
@@ -16,7 +18,8 @@
 }
 
 .buttons {
-  width: 30%;
+  width: 25%;
+  margin: 10px 0;
   float: right;
 }
 
@@ -25,7 +28,9 @@
   overflow: hidden;
 }
 .task input {
-  margin: 25px auto;
+  float: left;
+  padding: 0 8px;
+  margin: 12px 0;
   line-height: 40px;
   width: 60%;
   font-size: 16px;
