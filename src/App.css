@@ -1,4 +1,9 @@
 .App {
   text-align: center;
+  position: relative;
 }
 
+.clearfix {
+  content: "";
+  overflow: hidden;
+}

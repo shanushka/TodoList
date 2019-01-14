@@ -1,26 +1,38 @@
 import React from "react";
 
 import Task from "./Task";
+import { isTag } from "postcss-selector-parser";
 
-class TaskList extends React.Component {
-  render() {
-    return (
-      <div>
-        {this.props.todos.map(todo => {
-          return (
-            <Task
-              key={todo.id}
-              index={todo.id}
-              todo={todo}
-              handleComplete={this.props.handleComplete}
-              handleDelete ={this.props.handleDelete}
-              handleEdit ={this.props.handleEdit}
-            />
-          );
-        })}
-      </div>
-    );
+const TaskList = props => {
+  console.log("ii", props.activeState);
+
+  let list = null;
+  if (props.activeState == "Completed") {
+    list = props.todos.filter(todo => todo.done);
+  } else if (props.activeState == "Incomplete") {
+    list = props.todos.filter(todo => !todo.done);
+  } else {
+    list = [...props.todos];
   }
-}
+  return (
+    <div>
+      {list.map(todo => {
+        return (
+          <Task
+            key={todo.id}
+            index={todo.id}
+            todo={todo}
+            handleSubmit={props.handleSubmit}
+            handleComplete={props.handleComplete}
+            handleDelete={props.handleDelete}
+            handleEdit={props.handleEdit}
+            changeInput={props.changeInput}
+            userInput={props.userInput}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 export default TaskList;

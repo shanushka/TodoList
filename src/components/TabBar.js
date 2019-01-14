@@ -1,11 +1,17 @@
 import React from "react";
-
-const TabBar = () => {
+import "./TabBar.css";
+const TabBar = props => {
   return (
-    <div className='tab'>
-      <button className='tablinks'>Home</button>
-      <button className='tablinks'>Completed</button>
-      <button className='tablinks'>Incomplete</button>
+    <div className='Tabs'>
+      <div className='tablinks' onClick={() => props.activeStage("Home")}>
+        Home
+      </div>
+      <div className='tablinks' onClick={() => props.activeStage("Completed")}>
+        Completed
+      </div>
+      <div className='tablinks' onClick={() => props.activeStage("Incomplete")}>
+        Incomplete
+      </div>
     </div>
   );
 };

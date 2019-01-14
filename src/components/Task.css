@@ -1,7 +1,45 @@
 .task {
   text-decoration: none;
+  width: 75%;
+  margin: 25px auto;
+  border-bottom: 2px solid #ededed;
 }
 
-.task.complete {
+.tasks.complete {
   text-decoration: line-through;
+}
+
+.tasks span {
+  padding: 0 0px;
+  width: 60%;
+  float: left;
+}
+
+.buttons {
+  width: 30%;
+  float: right;
+}
+
+.clearfix {
+  content: "";
+  overflow: hidden;
+}
+
+.Complete {
+  background: url(../assets/complete.png) no-repeat;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  border: none;
+  margin: 0 4px;
+  border-radius: 50%;
+}
+.Undo {
+  background: url(../assets/incomplete.png) no-repeat;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  border: none;
+  margin: 0 4px;
+  border-radius: 50%;
 }

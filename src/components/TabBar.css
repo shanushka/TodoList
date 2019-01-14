@@ -1,0 +1,24 @@
+.Tabs {
+  position: relative;
+  display: inline-block;
+  width: 90%;
+  margin: 50px auto;
+}
+
+.tablinks {
+  /* display: inline-block; */
+  padding: 1em;
+  background: #ededed;
+  color: black;
+
+  cursor: pointer;
+  width: 30%;
+  float: left;
+}
+
+.tablinks:hover,
+.tablinks--active {
+  background: #0095ff;
+
+  color: rgb(255, 255, 255);
+}

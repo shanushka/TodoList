@@ -4,17 +4,15 @@ import Input from "./components/InputField";
 import Tab from "./components/TabBar";
 import TaskList from "./components/TaskList";
 import "./App.css";
+import { networkInterfaces } from "os";
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
+      active: "Home",
       userInput: "",
-      todos: [
-        { id: 1, value: "Clean the kitchen", done: false },
-        { id: 2, value: "wash the car", done: true }
-      ],
-      count: 3
+      todos: []
     };
   }
 
@@ -22,60 +20,75 @@ class App extends Component {
     this.setState({
       userInput: event.target.value
     });
-    console.log(event.target.value);
   };
 
   handleSubmit = evt => {
     evt.preventDefault();
     const newTodo = {
-      id: this.state.count,
+      id: Date.now(),
       value: this.state.userInput,
       done: false
     };
-
-    let count = this.state.count;
-    count++;
-    const todos = this.state.todos;
-    todos.push(newTodo);
+    const todos = [...this.state.todos, newTodo];
     this.setState({
       todos,
-      userInput: "",
-      count
+      userInput: ""
     });
   };
 
+  handleEdit = (evt, index, handleClick) => {
+    evt.preventDefault();
+    var todos = [...this.state.todos];
+    var indexx = todos.findIndex(todo => todo.id === index);
+    todos[indexx].value = this.state.userInput;
+    todos[indexx].done = this.state.todos[indexx].done;
+
+    this.setState({ todos });
+    handleClick();
+  };
   handleDelete = index => {
-    const todos = this.state.todos;
-    todos.pop(todos[index - 1]);
+    let todos = this.state.todos.filter(todo => {
+      return todo.id !== index;
+    });
     this.setState({ todos });
   };
 
   handleComplete = index => {
     const todos = this.state.todos;
-    todos[index - 1].done = !todos[index - 1].done;
+    var indexx = todos.findIndex(todo => todo.id === index);
+    todos[indexx].done = !todos[indexx].done;
     this.setState({ todos });
   };
 
-  handleEdit = index => {
-    // console.log("d", todos[index - 1].value);
-    // userInput = todos[index - 1].value;
+  activeStage = active => {
+    this.setState(
+      {
+        active
+      },
+      () => {}
+    );
   };
-
   render() {
     return (
-      <div className='App'>
+      <div className='App clearfix'>
         <h1>Todolist</h1>
-        <Tab />
         <Input
           handleChange={this.changeInput}
           userInput={this.state.userInput}
           onSubmit={this.handleSubmit}
+          value='+'
         />
+        <Tab activeStage={this.activeStage} />
+
         <TaskList
+          activeState={this.state.active}
           todos={this.state.todos}
+          handleSubmit={this.handleSubmit}
+          userInput={this.state.userInput}
           handleComplete={this.handleComplete}
           handleDelete={this.handleDelete}
           handleEdit={this.handleEdit}
+          changeInput={this.changeInput}
         />
       </div>
     );

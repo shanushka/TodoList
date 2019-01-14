@@ -1,20 +1,17 @@
 import React from "react";
+import "./InpuField.css";
 
 class InputList extends React.Component {
-  constructor(props) {
-    super();
-  }
-
   render() {
     return (
-      <div>
+      <div className='inputfield'>
         <form onSubmit={evt => this.props.onSubmit(evt)}>
           <input
             type='text'
-            value={this.props.userInput}
+            defaultValue={this.props.userInput}
             onChange={event => this.props.handleChange(event)}
           />
-          <button>Add</button>
+          <button>{this.props.value}</button>
         </form>
       </div>
     );
