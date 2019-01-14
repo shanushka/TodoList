@@ -8,11 +8,14 @@ import { networkInterfaces } from "os";
 class App extends Component {
   constructor() {
     super();
+    const storageData = window.localStorage.getItem("todoData");
+    const todos = storageData ? JSON.parse(storageData) : [];
 
     this.state = {
+      searchField: "",
       active: "Home",
       userInput: "",
-      todos: []
+      todos: todos
     };
   }
 
@@ -37,12 +40,12 @@ class App extends Component {
   };
 
   handleEdit = (evt, index, handleClick) => {
+    console.log("d", index);
     evt.preventDefault();
     var todos = [...this.state.todos];
     var indexx = todos.findIndex(todo => todo.id === index);
     todos[indexx].value = this.state.userInput;
     todos[indexx].done = this.state.todos[indexx].done;
-
     this.setState({ todos });
     handleClick();
   };
@@ -61,26 +64,47 @@ class App extends Component {
   };
 
   activeStage = active => {
-    this.setState(
-      {
-        active
-      },
-      () => {}
-    );
+    this.setState({
+      active
+    });
+  };
+  changeSearch = evt => {
+    this.setState({
+      searchField: evt.target.value
+    });
+  };
+  handleSearch = evt => {
+    this.setState({
+      searchField: ""
+    });
+    evt.preventDefault();
   };
   render() {
+    window.localStorage.clear();
+    window.localStorage.setItem("todoData", JSON.stringify(this.state.todos));
+
     return (
       <div className='App clearfix'>
-        <h1>Todolist</h1>
+        <div className='header clearfix'>
+          <h1>Todolist</h1>
+          <Input
+            value='search'
+            userInput={this.state.searchField}
+            onSubmit={this.handleSearch}
+            handleChange={this.changeSearch}
+          />
+        </div>
+
         <Input
           handleChange={this.changeInput}
           userInput={this.state.userInput}
           onSubmit={this.handleSubmit}
-          value='+'
+          value='Add'
         />
         <Tab activeStage={this.activeStage} />
 
         <TaskList
+          searchField={this.state.searchField}
           activeState={this.state.active}
           todos={this.state.todos}
           handleSubmit={this.handleSubmit}

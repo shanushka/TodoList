@@ -34,20 +34,22 @@ class Task extends React.Component {
       );
     } else {
       return (
-        <Input
-          userInput={this.props.todo.value}
-          value='Save'
-          edit={this.state.edit}
-          index={this.props.index}
-          onSubmit={event => {
-            this.props.handleEdit(
-              event,
-              this.props.index,
-              this.handelEditButtonClick
-            );
-          }}
-          handleChange={this.props.changeInput}
-        />
+        <div className='task clearfix'>
+          <Input
+            userInput={this.props.todo.value}
+            value='Save'
+            edit={this.state.edit}
+            index={this.props.index}
+            onSubmit={event => {
+              this.props.handleEdit(
+                event,
+                this.props.index,
+                this.handelEditButtonClick
+              );
+            }}
+            handleChange={this.props.changeInput}
+          />
+        </div>
       );
     }
   }

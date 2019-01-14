@@ -1,7 +1,7 @@
 .Tabs {
   position: relative;
   display: inline-block;
-  width: 90%;
+  width: 100%;
   margin: 50px auto;
 }
 
@@ -10,7 +10,6 @@
   padding: 1em;
   background: #ededed;
   color: black;
-
   cursor: pointer;
   width: 30%;
   float: left;

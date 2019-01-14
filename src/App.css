@@ -1,6 +1,12 @@
 .App {
   text-align: center;
   position: relative;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.header h1 {
+  float: left;
 }
 
 .clearfix {

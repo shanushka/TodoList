@@ -1,18 +1,20 @@
 import React from "react";
 
 import Task from "./Task";
-import { isTag } from "postcss-selector-parser";
 
 const TaskList = props => {
-  console.log("ii", props.activeState);
+
+  let filteredContent = props.todos.filter(todo => {
+    return todo.value.indexOf(props.searchField) !== -1;
+  });
 
   let list = null;
   if (props.activeState == "Completed") {
-    list = props.todos.filter(todo => todo.done);
+    list = filteredContent.filter(todo => todo.done);
   } else if (props.activeState == "Incomplete") {
-    list = props.todos.filter(todo => !todo.done);
+    list = filteredContent.filter(todo => !todo.done);
   } else {
-    list = [...props.todos];
+    list = [...filteredContent];
   }
   return (
     <div>

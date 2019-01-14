@@ -9,9 +9,9 @@
   text-decoration: line-through;
 }
 
-.tasks span {
+.tasks {
   padding: 0 0px;
-  width: 60%;
+  width: 65%;
   float: left;
 }
 
@@ -23,6 +23,12 @@
 .clearfix {
   content: "";
   overflow: hidden;
+}
+.task input {
+  margin: 25px auto;
+  line-height: 40px;
+  width: 60%;
+  font-size: 16px;
 }
 
 .Complete {
