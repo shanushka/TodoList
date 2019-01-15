@@ -9,6 +9,7 @@
   color: #0095ff;
   font-size: 50px;
   float: left;
+  padding:8px 0;
 }
 
 .clearfix {
@@ -37,10 +38,14 @@
 }
 .add,
 .save {
-  position: absolute;
-  padding-top: 0px;
+  padding: 0px 10px;
   width: 100%;
   margin: 0 auto;
+}
+.save {
+  border-radius: 10px;
+  line-height: 50px;
+  background: #f0eded;
 }
 .add input {
   line-height: 35px;
@@ -52,9 +57,9 @@
 }
 .search button {
   background: url(../images/search.png) no-repeat;
-  height: 40px;
-  width: 40px;
-  margin: 4px 14px;
+  height: 32px;
+  width: 32px;
+  margin: 0px 4px 0px 8px;
   font-size: 0px;
   border: none;
   background-size: cover;
@@ -63,7 +68,7 @@
 .search {
   float: right;
   width: 40%;
-  margin: 30px 8px;
+  margin: 30px 0px;
 }
 
 .search input {
@@ -71,7 +76,7 @@
   border: 2px solid #ededed;
   line-height: 28px;
   padding: 0 8px;
-  width: 80%;
+  width: 78%;
 }
 
 .add button,
@@ -135,7 +140,7 @@
 }
 
 .buttons {
-  width: 25%;
+  width: 20%;
   margin: 10px 0;
   float: right;
 }
@@ -171,4 +176,40 @@
   border: none;
   margin: 0 4px;
   border-radius: 50%;
+}
+
+@media only screen and (max-width: 1060px) {
+  .add input {
+    width:70%;
+  }
+  .add button{
+    width:90px;
+  }
+  .buttons{
+    width:34%
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .add input {
+    width:60%;
+    line-height:32px;
+  }
+  .buttons{
+    width:36%
+  }
+  .add button{
+    width:80px;
+  }
+  .search{
+    margin:16px 0;
+    float:none;
+    width:100%;
+    line-height: 40px;
+  }
+  .search input{
+    line-height:32px;
+
+  }
+  
 }

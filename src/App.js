@@ -1,41 +1,53 @@
 import React, { Component } from 'react';
 
+import './assets/css/reset.css';
 import './assets/css/layout.css';
 import Tab from './components/TabBar';
 import Input from './components/InputField';
 import TaskList from './components/TaskList';
 
-/** main component */
+/**
+ * Main class component.
+ *
+ * @class App
+ * @extends {Component}
+ */
 class App extends Component {
 
-  /** main component */
-  /**
-   */
   constructor() {
     super();
 
-    const storageData = window.localStorage.getItem('todoData');
-    const todos = storageData ? JSON.parse(storageData) : [];
 
     this.state = {
       searchField: '',
       active: 'Home',
       userInput: '',
-      todos: todos
+      todos: []
     };
   }
-  /*
-   @param  {} event
-   */
+
+  componentDidMount(){
+    const storageData = window.localStorage.getItem('todoData');
+    const todos = storageData ? JSON.parse(storageData) : [];
+    this.setState({
+      todos: todos
+    })
+  }
+
+  componentDidUpdate(){
+    window.localStorage.clear();
+    window.localStorage.setItem('todoData', JSON.stringify(this.state.todos));
+  }
+
   changeInput = event => {
     this.setState({
       userInput: event.target.value
     });
   };
-  /*
-    @param  {event} evt
-   */
+
   handleSubmit = evt => {
+    evt.preventDefault();
+
     const newTodo = {
       id: Date.now(),
       value: this.state.userInput,
@@ -43,23 +55,16 @@ class App extends Component {
     };
     const todos = [...this.state.todos, newTodo];
 
-    evt.preventDefault();
     this.setState({
       todos,
       userInput: ''
     });
   };
-  /*
-    @param  {event} evt
-    @param  {string} index
-    @param  {function} handleClick
-    @param  {string} editedContent
-   */
-  handleEdit = (evt, index, handleClick, editedContent) => {
-    evt.preventDefault();
 
+  handleEdit = (evt, id, handleClick, editedContent) => {
+    evt.preventDefault();
     const todos = [...this.state.todos];
-    const indexx = todos.findIndex(todo => todo.id === index);
+    const indexx = todos.findIndex(todo => todo.id === id);
 
     todos[indexx].value = editedContent;
     todos[indexx].done = this.state.todos[indexx].done;
@@ -67,63 +72,45 @@ class App extends Component {
     this.setState({ todos });
     handleClick();
   };
-  /*
-    @param  {string} index
-   */
-  handleDelete = index => {
+
+  handleDelete = id => {
     const todos = this.state.todos.filter(todo => {
-      return todo.id !== index;
+      return todo.id !== id;
     });
 
     this.setState({ todos });
   };
-  /*
-    @param  {string} index
-   */
-  handleComplete = index => {
+
+  handleComplete = id => {
     const todos = this.state.todos;
-    const indexx = todos.findIndex(todo => todo.id === index);
+    const indexx = todos.findIndex(todo => todo.id === id);
 
     todos[indexx].done = !todos[indexx].done;
 
     this.setState({ todos });
   };
-  /*
-   * @param  {string} active
-   */
+
   setActiveState = active => {
     this.setState({
       active
     });
   };
-  /*
-    @param  {event} evt
-   */
+
   changeSearch = evt => {
     this.setState({
       searchField: evt.target.value
     });
   };
-  /*
-    @param  {event} evt
-   */
+
   handleSearch = evt => {
     evt.preventDefault();
+
     this.setState({
       searchField: ''
     });
   };
 
-
-  /**
-   *
-   *
-   * @returns {Dom}
-   * @memberof App
-   */
   render() {
-    window.localStorage.clear();
-    window.localStorage.setItem('todoData', JSON.stringify(this.state.todos));
 
     return (
       <div className='App clearfix'>

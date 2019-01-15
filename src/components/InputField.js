@@ -6,6 +6,7 @@ import React from 'react';
  * @param {objects} props
  * @returns {Dom of Input field}
  */
+
 const InputList = props => {
   return (
     <div className={props.label.toLowerCase()}>

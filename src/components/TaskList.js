@@ -26,7 +26,8 @@ const TaskList = props => {
 
   if (list.length !== 0) {
     return (
-      <div>
+      <ul>
+    
         {list.map(todo => {
           return (
             <Task
@@ -42,7 +43,8 @@ const TaskList = props => {
             />
           );
         })}
-      </div>
+        
+      </ul>
     );
   } 
     
