@@ -1,31 +1,29 @@
-import React from "react";
-import "./TabBar.css";
-const TabBar = props => {
-  console.log("ss", props.activeState);
+import React from 'react';
 
+const TabBar = props => {
   return (
     <div className='Tabs'>
       <div
         className={
-          props.activeState === "Home" ? "tablinks active" : "tablinks"
+          props.activeState === 'Home' ? 'tablinks active' : 'tablinks'
         }
-        onClick={() => props.activeStage("Home")}
+        onClick={() => props.setActiveState('Home')}
       >
         Home
       </div>
       <div
         className={
-          props.activeState === "Completed" ? "tablinks active" : "tablinks"
+          props.activeState === 'Completed' ? 'tablinks active' : 'tablinks'
         }
-        onClick={() => props.activeStage("Completed")}
+        onClick={() => props.setActiveState('Completed')}
       >
         Completed
       </div>
       <div
         className={
-          props.activeState === "Incomplete" ? "tablinks active" : "tablinks"
+          props.activeState === 'Incomplete' ? 'tablinks active' : 'tablinks'
         }
-        onClick={() => props.activeStage("Incomplete")}
+        onClick={() => props.setActiveState('Incomplete')}
       >
         Incomplete
       </div>

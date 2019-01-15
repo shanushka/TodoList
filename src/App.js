@@ -1,20 +1,20 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import Input from "./components/InputField";
-import Tab from "./components/TabBar";
-import TaskList from "./components/TaskList";
-import "./App.css";
-import { networkInterfaces } from "os";
+import './assets/css/layout.css';
+import Tab from './components/TabBar';
+import Input from './components/InputField';
+import TaskList from './components/TaskList';
+
 class App extends Component {
   constructor() {
     super();
-    const storageData = window.localStorage.getItem("todoData");
+    const storageData = window.localStorage.getItem('todoData');
     const todos = storageData ? JSON.parse(storageData) : [];
 
     this.state = {
-      searchField: "",
-      active: "Home",
-      userInput: "",
+      searchField: '',
+      active: 'Home',
+      userInput: '',
       todos: todos
     };
   }
@@ -26,25 +26,28 @@ class App extends Component {
   };
 
   handleSubmit = evt => {
-    evt.preventDefault();
     const newTodo = {
       id: Date.now(),
       value: this.state.userInput,
       done: false
     };
     const todos = [...this.state.todos, newTodo];
+
+    evt.preventDefault();
     this.setState({
       todos,
-      userInput: ""
+      userInput: ''
     });
   };
 
   handleEdit = (evt, index, handleClick, editedContent) => {
     evt.preventDefault();
+
     var todos = [...this.state.todos];
     var indexx = todos.findIndex(todo => todo.id === index);
     todos[indexx].value = editedContent;
     todos[indexx].done = this.state.todos[indexx].done;
+
     this.setState({ todos });
     handleClick();
   };
@@ -52,6 +55,7 @@ class App extends Component {
     let todos = this.state.todos.filter(todo => {
       return todo.id !== index;
     });
+
     this.setState({ todos });
   };
 
@@ -59,10 +63,11 @@ class App extends Component {
     const todos = this.state.todos;
     var indexx = todos.findIndex(todo => todo.id === index);
     todos[indexx].done = !todos[indexx].done;
+
     this.setState({ todos });
   };
 
-  activeStage = active => {
+  setActiveState = active => {
     this.setState({
       active
     });
@@ -75,12 +80,12 @@ class App extends Component {
   handleSearch = evt => {
     evt.preventDefault();
     this.setState({
-      searchField: ""
+      searchField: ''
     });
   };
   render() {
     window.localStorage.clear();
-    window.localStorage.setItem("todoData", JSON.stringify(this.state.todos));
+    window.localStorage.setItem('todoData', JSON.stringify(this.state.todos));
 
     return (
       <div className='App clearfix'>
@@ -100,7 +105,10 @@ class App extends Component {
           onSubmit={this.handleSubmit}
           value='Add'
         />
-        <Tab activeStage={this.activeStage} activeState={this.state.active} />
+        <Tab
+          setActiveState={this.setActiveState}
+          activeState={this.state.active}
+        />
 
         <TaskList
           searchField={this.state.searchField}

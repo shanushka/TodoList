@@ -1,22 +1,19 @@
-import React from "react";
-import "./InpuField.css";
+import React from 'react';
 
-class InputList extends React.Component {
-  render() {
-    return (
-      <div className={this.props.value}>
-        <form onSubmit={evt => this.props.onSubmit(evt)}>
-          <input
-            type='text'
-            placeholder={this.props.value}
-            value={this.props.userInput}
-            onChange={event => this.props.handleChange(event)}
-          />
-          <button>{this.props.value}</button>
-        </form>
-      </div>
-    );
-  }
-}
+const InputList = props => {
+  return (
+    <div className={props.value}>
+      <form onSubmit={evt => props.onSubmit(evt)}>
+        <input
+          type='text'
+          placeholder={props.value}
+          value={props.userInput}
+          onChange={event => props.handleChange(event)}
+        />
+        <button>{props.value}</button>
+      </form>
+    </div>
+  );
+};
 
 export default InputList;
