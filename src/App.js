@@ -64,10 +64,10 @@ class App extends Component {
   handleEdit = (evt, id, handleClick, editedContent) => {
     evt.preventDefault();
     const todos = [...this.state.todos];
-    const indexx = todos.findIndex(todo => todo.id === id);
+    const index = todos.findIndex(todo => todo.id === id);
 
-    todos[indexx].value = editedContent;
-    todos[indexx].done = this.state.todos[indexx].done;
+    todos[index].value = editedContent;
+    todos[index].done = this.state.todos[index].done;
 
     this.setState({ todos });
     handleClick();
@@ -83,9 +83,9 @@ class App extends Component {
 
   handleComplete = id => {
     const todos = this.state.todos;
-    const indexx = todos.findIndex(todo => todo.id === id);
+    const index = todos.findIndex(todo => todo.id === id);
 
-    todos[indexx].done = !todos[indexx].done;
+    todos[index].done = !todos[index].done;
 
     this.setState({ todos });
   };
@@ -111,7 +111,6 @@ class App extends Component {
   };
 
   render() {
-
     return (
       <div className='App clearfix'>
         <div className='header clearfix'>
@@ -149,7 +148,6 @@ class App extends Component {
       </div>
     );
   }
-
 }
 
 export default App;

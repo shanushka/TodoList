@@ -30,6 +30,7 @@ class Task extends React.Component {
       'undo':this.props.todo.done,
       'complete':!this.props.todo.done
     })
+    
     if (!this.state.edit) {
       return (
         <li className='task clearfix'>
@@ -38,7 +39,7 @@ class Task extends React.Component {
           </span>
           <div class='buttons'>
             <button
-              className={buttonClass }
+              className={buttonClass}
               onClick={() => this.props.handleComplete(this.props.id)}
             />
             <Button
@@ -72,11 +73,6 @@ class Task extends React.Component {
     }
   }
 
-  /**
-   *
-   *
-   * @param {*} evt
-   */
   changeEditedContent = (evt) => {
     this.setState({
       editedContent: evt.target.value

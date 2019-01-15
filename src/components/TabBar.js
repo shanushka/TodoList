@@ -14,6 +14,7 @@ const TabBar = props => {
   var inCompleteClass = classNames('tablinks', {
     active: props.activeState === 'Incomplete'
   });
+  
   return (
     <div className='tabs'>
       <div className={homeClass} onClick={() => props.setActiveState('Home')}>
