@@ -35,14 +35,14 @@
   border-radius: 50%;
   border: none;
 }
-.Add,
-.Save {
+.add,
+.save {
   position: absolute;
   padding-top: 0px;
   width: 100%;
   margin: 0 auto;
 }
-.Add input {
+.add input {
   line-height: 35px;
   width: 86%;
   padding: 0 8px;
@@ -74,8 +74,8 @@
   width: 80%;
 }
 
-.Add button,
-.Save button {
+.add button,
+.save button {
   line-height: 35px;
   width: 100px;
   border-radius: 16px;
@@ -86,7 +86,7 @@
   margin: 4px 14px;
 }
 
-.Tabs {
+.tabs {
   position: relative;
   display: inline-block;
   width: 100%;
@@ -124,7 +124,7 @@
   background: #f0eded;
   border-radius: 10px;
 }
-.tasks.complete {
+.tasks.completed {
   text-decoration: line-through;
 }
 
@@ -153,7 +153,7 @@
   font-size: 16px;
 }
 
-.Complete {
+.complete {
   background: url(../images/complete.png) no-repeat;
   height: 40px;
   width: 40px;
@@ -162,7 +162,8 @@
   margin: 0 4px;
   border-radius: 50%;
 }
-.Undo {
+
+.undo {
   background: url(../images/incomplete.png) no-repeat;
   height: 40px;
   width: 40px;

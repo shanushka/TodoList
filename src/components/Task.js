@@ -2,6 +2,7 @@ import React from 'react';
 
 import Button from './Button';
 import Input from './InputField';
+import classNames from 'classnames';
 
 class Task extends React.Component {
   constructor(props) {
@@ -12,23 +13,53 @@ class Task extends React.Component {
       edit: false
     };
   }
+  /**
+   *
+   *
+   * @memberof Task
+   */
+  changeEditedContent = evt => {
+    this.setState({
+      editedContent: evt.target.value
+    });
+  };
+
+  /**
+   *
+   *
+   * @memberof Task
+   */
+  handelEditButtonClick = () => {
+    const newEdit = !this.state.edit;
+
+    this.setState({
+      edit: newEdit
+    });
+  };
 
   render() {
+    const spanClass = classNames('tasks', {
+      completed: this.props.todo.done
+    });
+
+    var buttonClass = classNames({
+      undo: this.props.todo.done,
+      complete: !this.props.todo.done
+    });
+
     if (!this.state.edit) {
       return (
         <div className='task clearfix'>
-          <span className={this.props.todo.done ? 'tasks complete' : 'tasks'}>
-            {this.props.todo.value}
-          </span>
+          <span className={spanClass}>{this.props.todo.value}</span>
           <div class='buttons'>
             <button
-              className={this.props.todo.done ? 'Undo' : 'Complete'}
-              onClick={() => this.props.handleComplete(this.props.index)}
+              className={buttonClass}
+              onClick={() => this.props.handleComplete(this.props.id)}
             />
             <Button
               value='delete'
               onClick={this.props.handleDelete}
-              index={this.props.index}
+              id={this.props.id}
             />
             <Button value='edit' onClick={this.handelEditButtonClick} />
           </div>
@@ -39,37 +70,23 @@ class Task extends React.Component {
         <div className='task clearfix'>
           <Input
             userInput={this.state.editedContent}
-            value='Save'
+            label='Save'
             edit={this.state.edit}
-            index={this.props.index}
+            id={this.props.id}
             onSubmit={event => {
               this.props.handleEdit(
                 event,
-                this.props.index,
+                this.props.id,
                 this.handelEditButtonClick,
                 this.state.editedContent
               );
             }}
-            handleChange={evt => {
-              this.changeEditedContent(evt);
-            }}
+            handleChange={this.changeEditedContent}
           />
         </div>
       );
     }
   }
-  changeEditedContent = evt => {
-    this.setState({
-      editedContent: evt.target.value
-    });
-  };
-
-  handelEditButtonClick = () => {
-    let newEdit = !this.state.edit;
-    this.setState({
-      edit: newEdit
-    });
-  };
 }
 
 export default Task;

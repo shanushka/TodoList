@@ -1,28 +1,39 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
+/**
+ *
+ *
+ * @param {object} props
+ * @returns
+ */
+
 const TabBar = props => {
+  var homeClass = classNames('tablinks',{
+    active: props.activeState === 'Home'
+  });
+
+  var completeClass = classNames('tablinks',{
+    active: props.activeState === 'Completed'
+  });
+
+  var inCompleteClass = classNames('tablinks',{
+    active: props.activeState === 'Incomplete'
+  });
   return (
-    <div className='Tabs'>
-      <div
-        className={
-          props.activeState === 'Home' ? 'tablinks active' : 'tablinks'
-        }
-        onClick={() => props.setActiveState('Home')}
-      >
+    <div className='tabs'>
+      <div className={homeClass} onClick={() => props.setActiveState('Home')}>
         Home
       </div>
       <div
-        className={
-          props.activeState === 'Completed' ? 'tablinks active' : 'tablinks'
-        }
+        className={completeClass}
         onClick={() => props.setActiveState('Completed')}
       >
         Completed
       </div>
       <div
-        className={
-          props.activeState === 'Incomplete' ? 'tablinks active' : 'tablinks'
-        }
+        className={inCompleteClass} 
         onClick={() => props.setActiveState('Incomplete')}
       >
         Incomplete
@@ -30,4 +41,5 @@ const TabBar = props => {
     </div>
   );
 };
+
 export default TabBar;

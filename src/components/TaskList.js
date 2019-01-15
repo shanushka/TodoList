@@ -2,29 +2,36 @@ import React from 'react';
 
 import Task from './Task';
 
+/**
+ *
+ *
+ * @param {*} props
+ * @returns
+ */
 const TaskList = props => {
-  console.log(props.todos);
 
-  let filteredContent = props.todos.filter(todo => {
+  const filteredContent = props.todos.filter(todo => {
     return todo.value.indexOf(props.searchField) !== -1;
   });
 
   let list = null;
-  if (props.activeState == 'Completed') {
+
+  if (props.activeState === 'Completed') {
     list = filteredContent.filter(todo => todo.done);
-  } else if (props.activeState == 'Incomplete') {
+  } else if (props.activeState === 'Incomplete') {
     list = filteredContent.filter(todo => !todo.done);
   } else {
     list = [...filteredContent];
   }
-  if (list.length != 0) {
+
+  if (list.length !== 0) {
     return (
       <div>
         {list.map(todo => {
           return (
             <Task
               key={todo.id}
-              index={todo.id}
+              id={todo.id}
               todo={todo}
               handleSubmit={props.handleSubmit}
               handleComplete={props.handleComplete}
@@ -37,9 +44,10 @@ const TaskList = props => {
         })}
       </div>
     );
-  } else {
-    return <div className="notodo">No Todo Lists To Show</div>;
-  }
+  } 
+    
+  return <div className="notodo">No Todo Lists To Show</div>;
+  
 };
 
 export default TaskList;
