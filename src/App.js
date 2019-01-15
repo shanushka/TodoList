@@ -1,19 +1,42 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import Input from "./components/InputField";
-import Tab from "./components/TabBar";
-import TaskList from "./components/TaskList";
-import "./App.css";
-import { networkInterfaces } from "os";
+import './assets/css/reset.css';
+import './assets/css/layout.css';
+import Tab from './components/TabBar';
+import Input from './components/InputField';
+import TaskList from './components/TaskList';
+
+/**
+ * Main class component.
+ *
+ * @class App
+ * @extends {Component}
+ */
 class App extends Component {
+
   constructor() {
     super();
 
+
     this.state = {
-      active: "Home",
-      userInput: "",
+      searchField: '',
+      active: 'Home',
+      userInput: '',
       todos: []
     };
+  }
+
+  componentDidMount(){
+    const storageData = window.localStorage.getItem('todoData');
+    const todos = storageData ? JSON.parse(storageData) : [];
+    this.setState({
+      todos: todos
+    })
+  }
+
+  componentDidUpdate(){
+    window.localStorage.clear();
+    window.localStorage.setItem('todoData', JSON.stringify(this.state.todos));
   }
 
   changeInput = event => {
@@ -24,63 +47,95 @@ class App extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
+
     const newTodo = {
       id: Date.now(),
       value: this.state.userInput,
       done: false
     };
     const todos = [...this.state.todos, newTodo];
+
     this.setState({
       todos,
-      userInput: ""
+      userInput: ''
     });
   };
 
-  handleEdit = (evt, index, handleClick) => {
+  handleEdit = (evt, id, handleClick, editedContent) => {
     evt.preventDefault();
-    var todos = [...this.state.todos];
-    var indexx = todos.findIndex(todo => todo.id === index);
-    todos[indexx].value = this.state.userInput;
-    todos[indexx].done = this.state.todos[indexx].done;
+    const todos = [...this.state.todos];
+    const index = todos.findIndex(todo => todo.id === id);
+
+    todos[index].value = editedContent;
+    todos[index].done = this.state.todos[index].done;
 
     this.setState({ todos });
     handleClick();
   };
-  handleDelete = index => {
-    let todos = this.state.todos.filter(todo => {
-      return todo.id !== index;
+
+  handleDelete = id => {
+    const todos = this.state.todos.filter(todo => {
+      return todo.id !== id;
     });
+
     this.setState({ todos });
   };
 
-  handleComplete = index => {
+  handleComplete = id => {
     const todos = this.state.todos;
-    var indexx = todos.findIndex(todo => todo.id === index);
-    todos[indexx].done = !todos[indexx].done;
+    const index = todos.findIndex(todo => todo.id === id);
+
+    todos[index].done = !todos[index].done;
+
     this.setState({ todos });
   };
 
-  activeStage = active => {
-    this.setState(
-      {
-        active
-      },
-      () => {}
-    );
+  setActiveState = active => {
+    this.setState({
+      active
+    });
   };
+
+  changeSearch = evt => {
+    this.setState({
+      searchField: evt.target.value
+    });
+  };
+
+  handleSearch = evt => {
+    evt.preventDefault();
+
+    this.setState({
+      searchField: ''
+    });
+  };
+
   render() {
     return (
       <div className='App clearfix'>
-        <h1>Todolist</h1>
+        <div className='header clearfix'>
+          <h1>Todolist</h1>
+          <Input
+            label='search'
+            userInput={this.state.searchField}
+            onSubmit={this.handleSearch}
+            handleChange={this.changeSearch}
+          />
+        </div>
+
         <Input
           handleChange={this.changeInput}
           userInput={this.state.userInput}
           onSubmit={this.handleSubmit}
-          value='+'
+          label='Add'
         />
-        <Tab activeStage={this.activeStage} />
+        <Tab
+          setActiveState={this.setActiveState}
+          activeState={this.state.active}
+        />
 
         <TaskList
+          searchField={this.state.searchField}
           activeState={this.state.active}
           todos={this.state.todos}
           handleSubmit={this.handleSubmit}

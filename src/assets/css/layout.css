@@ -1,0 +1,219 @@
+.App {
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+  max-width: 1290px;
+}
+
+.header h1 {
+  color: #0095ff;
+  font-size: 50px;
+  float: left;
+  padding:8px 0;
+}
+
+.clearfix {
+  content: '';
+  overflow: hidden;
+}
+
+.delete {
+  background: url(../images/delete.png) no-repeat;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  border: none;
+  margin: 0 4px;
+  border-radius: 50%;
+}
+
+.edit {
+  background: url(../images/edit.png) no-repeat;
+  background-size: cover;
+  height: 40px;
+  width: 40px;
+  margin: 0 4px;
+  border-radius: 50%;
+  border: none;
+}
+
+.add,
+.save {
+  padding: 0px 10px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.save {
+  border-radius: 10px;
+  line-height: 50px;
+  background: #f0eded;
+}
+
+.add input {
+  line-height: 35px;
+  width: 86%;
+  padding: 0 8px;
+  border-radius: 16px;
+  border: 2px solid #ededed;
+  font-size: 20px;
+}
+
+.search button {
+  background: url(../images/search.png) no-repeat;
+  height: 32px;
+  width: 32px;
+  margin: 0px 4px 0px 8px;
+  font-size: 0px;
+  border: none;
+  background-size: cover;
+}
+
+.search {
+  float: right;
+  width: 40%;
+  margin: 30px 0px;
+}
+
+.search input {
+  border-radius: 16px;
+  border: 2px solid #ededed;
+  line-height: 28px;
+  padding: 0 8px;
+  width: 78%;
+}
+
+.add button,
+.save button {
+  line-height: 35px;
+  width: 100px;
+  border-radius: 16px;
+  background-color: #0095ff;
+  color: white;
+  border: none;
+  font-size: 20px;
+  margin: 4px 14px;
+}
+
+.tabs {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 56px auto 10px;
+}
+
+.tablinks {
+  background: #ededed;
+  color: black;
+  cursor: pointer;
+  width: 33.333333%;
+  float: left;
+  line-height: 50px;
+}
+
+.tablinks:hover {
+  opacity: 0.7;
+}
+
+.tablinks.active {
+  background: #0095ff;
+  color: rgb(255, 255, 255);
+}
+
+.task {
+  text-decoration: none;
+  width: 100%;
+  margin: 8px auto;
+  line-height: 45px;
+  border-radius: 10px;
+  background: #f0eded;
+}
+.notodo {
+  line-height: 45px;
+  background: #f0eded;
+  border-radius: 10px;
+}
+.tasks.completed {
+  text-decoration: line-through;
+}
+
+.tasks {
+  padding: 0 0px;
+  width: 65%;
+  float: left;
+}
+
+.buttons {
+  width: 20%;
+  margin: 10px 0;
+  float: right;
+}
+
+.clearfix {
+  content: '';
+  overflow: hidden;
+}
+.task input {
+  float: left;
+  padding: 0 8px;
+  margin: 12px 0;
+  line-height: 40px;
+  width: 60%;
+  font-size: 16px;
+}
+
+.complete {
+  background: url(../images/complete.png) no-repeat;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  border: none;
+  margin: 0 4px;
+  border-radius: 50%;
+}
+
+.undo {
+  background: url(../images/incomplete.png) no-repeat;
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  border: none;
+  margin: 0 4px;
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 1060px) {
+  .add input {
+    width:70%;
+  }
+  .add button{
+    width:90px;
+  }
+  .buttons{
+    width:34%
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .add input {
+    width:60%;
+    line-height:32px;
+  }
+  .buttons{
+    width:36%
+  }
+  .add button{
+    width:80px;
+  }
+  .search{
+    margin:16px 0;
+    float:none;
+    width:100%;
+    line-height: 40px;
+  }
+  .search input{
+    line-height:32px;
+
+  }
+  
+}

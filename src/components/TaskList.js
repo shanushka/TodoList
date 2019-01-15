@@ -1,38 +1,55 @@
-import React from "react";
+import React from 'react';
 
-import Task from "./Task";
-import { isTag } from "postcss-selector-parser";
+import Task from './Task';
 
+/**
+ * TaskList components 
+ *
+ * @param {*} props
+ * @returns
+ */
 const TaskList = props => {
-  console.log("ii", props.activeState);
+
+  const filteredContent = props.todos.filter(todo => {
+    return todo.value.indexOf(props.searchField) !== -1;
+  });
 
   let list = null;
-  if (props.activeState == "Completed") {
-    list = props.todos.filter(todo => todo.done);
-  } else if (props.activeState == "Incomplete") {
-    list = props.todos.filter(todo => !todo.done);
+
+  if (props.activeState === 'Completed') {
+    list = filteredContent.filter(todo => todo.done);
+  } else if (props.activeState === 'Incomplete') {
+    list = filteredContent.filter(todo => !todo.done);
   } else {
-    list = [...props.todos];
+    list = [...filteredContent];
   }
-  return (
-    <div>
-      {list.map(todo => {
-        return (
-          <Task
-            key={todo.id}
-            index={todo.id}
-            todo={todo}
-            handleSubmit={props.handleSubmit}
-            handleComplete={props.handleComplete}
-            handleDelete={props.handleDelete}
-            handleEdit={props.handleEdit}
-            changeInput={props.changeInput}
-            userInput={props.userInput}
-          />
-        );
-      })}
-    </div>
-  );
+
+  if (list.length !== 0) {
+    return (
+      <ul>
+    
+        {list.map(todo => {
+          return (
+            <Task
+              key={todo.id}
+              id={todo.id}
+              todo={todo}
+              handleSubmit={props.handleSubmit}
+              handleComplete={props.handleComplete}
+              handleDelete={props.handleDelete}
+              handleEdit={props.handleEdit}
+              changeInput={props.changeInput}
+              userInput={props.userInput}
+            />
+          );
+        })}
+        
+      </ul>
+    );
+  } 
+    
+  return <div className="notodo">No Todo Lists To Show</div>;
+  
 };
 
 export default TaskList;

@@ -1,11 +1,10 @@
-import React from "react";
-import "./Button.css";
+import React from 'react';
 
 const Button = props => {
   return (
     <button
       className={props.value}
-      onClick={() => props.onClick(props.index)}
+      onClick={() => props.onClick(props.id)}
     />
   );
 };
