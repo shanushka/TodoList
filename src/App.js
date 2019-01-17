@@ -96,7 +96,6 @@ class App extends Component {
       return{
         ...currentTodo,
         done: !currentTodo.done
-        
       };
     });
 
