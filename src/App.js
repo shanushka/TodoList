@@ -87,12 +87,20 @@ class App extends Component {
   };
 
   handleComplete = id => {
-    const todos = this.state.todos;
-    const index = todos.findIndex(todo => todo.id === id);
+  
+    const newTodos = this.state.todos.map((currentTodo) => {
+      if (currentTodo.id !== id) {
+        return currentTodo;
+      }
 
-    todos[index].done = !todos[index].done;
+      return{
+        ...currentTodo,
+        done: !currentTodo.done
+        
+      };
+    });
 
-    this.setState({ todos });
+    this.setState({ todos: newTodos });
   };
 
   setActiveState = active => {
