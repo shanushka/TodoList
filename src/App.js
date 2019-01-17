@@ -17,7 +17,6 @@ class App extends Component {
   constructor() {
     super();
 
-
     this.state = {
       searchField: '',
       active: 'Home',
@@ -26,15 +25,15 @@ class App extends Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const storageData = window.localStorage.getItem('todoData');
     const todos = storageData ? JSON.parse(storageData) : [];
     this.setState({
       todos: todos
-    })
+    });
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     window.localStorage.clear();
     window.localStorage.setItem('todoData', JSON.stringify(this.state.todos));
   }
@@ -63,13 +62,19 @@ class App extends Component {
 
   handleEdit = (evt, id, handleClick, editedContent) => {
     evt.preventDefault();
-    const todos = [...this.state.todos];
-    const index = todos.findIndex(todo => todo.id === id);
 
-    todos[index].value = editedContent;
-    todos[index].done = this.state.todos[index].done;
+    const newTodos = this.state.todos.map((currentTodo) => {
+      if (currentTodo.id !== id) {
+        return currentTodo;
+      }
 
-    this.setState({ todos });
+      return{
+        ...currentTodo,
+        value: editedContent
+      };
+    });
+
+    this.setState({ todos: newTodos });
     handleClick();
   };
 
