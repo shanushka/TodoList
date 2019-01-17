@@ -87,7 +87,6 @@ class App extends Component {
   };
 
   handleComplete = id => {
-  
     const newTodos = this.state.todos.map((currentTodo) => {
       if (currentTodo.id !== id) {
         return currentTodo;
